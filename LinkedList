@@ -1,0 +1,137 @@
+class Node
+{
+	int data;
+	Node next;
+	Node(int data)
+	{
+		this.data = data;
+		this.next = null;
+	}
+}
+public class LinkedList
+{
+	Node Head;
+	LinkedList()
+	{
+		this.Head = null;
+	}
+	public void Insert_At_End(int data)
+	{
+		Node newnode = new Node(data);
+		if(this.Head == null)
+		{
+			this.Head = newnode;
+		}
+		else
+		{
+			Node temp = this.Head;
+			while(temp.next!=null)
+			{
+				temp = temp.next;
+			}
+			temp.next = newnode;
+		}
+	}
+	public void Insert_At_Begin(int data)
+	{
+		Node newnode = new Node(data);
+		if(this.Head==null)
+		{
+			this.Head=newnode;
+		}
+		else
+		{
+			newnode.next = this.Head;
+			this.Head = newnode;
+		}
+	}
+	public void Insert_At_Position(int data, int pos)
+	{
+		Node newnode = new Node(data);
+		if(pos==1)
+		{
+			newnode.next = this.Head;
+			this.Head = newnode;
+		}
+		else
+		{
+			Node temp = this.Head;
+			for(int i=0; i<pos-2 && temp.next!=null; i++)
+			{
+				temp = temp.next;
+			}
+			newnode.next = temp.next;
+			temp.next = newnode;
+		}
+	}
+	public void Delete_At_End()
+	{
+	    if (this.Head==null)
+	    {
+	        System.out.println("List is Empty");
+	    }
+	    else if (this.Head.next == null)
+	    {
+	        this.Head = null;
+	    }
+	    else
+	    {
+	        Node temp = this.Head;
+	        while(temp.next.next != null)
+	        {
+	            temp = temp.next;
+	        }
+	        temp.next = null;
+	    }
+	}
+	public void Delete_At_Begin()
+	{
+	    if (this.Head==null)
+	    {
+	        System.out.println("List is Empty");
+	    }
+	    else
+	    {
+	        this.Head = this.Head.next;
+	    }
+	}
+	public void Delete_At_Position(int pos)
+	{
+	    if(pos == 1)
+	    {
+	        this.Head = this.Head.next;
+	    }
+	    else
+	    {
+	        Node temp = this.Head;
+	        while(pos-2 > 0 && temp.next!=null)
+	        {
+	            temp = temp.next;
+	            pos--;
+	        }
+	        temp.next = temp.next.next;
+	    }
+	}
+	public void Display()
+	{
+		Node temp = this.Head;
+		while(temp!=null)
+		{
+			System.out.println(temp+" "+temp.data+" "+temp.next);
+			temp = temp.next;
+		}
+	}
+	public static void main (String[] args)
+	{
+		LinkedList list = new LinkedList();
+		list.Insert_At_End(1);
+		list.Insert_At_End(2);
+		list.Insert_At_End(3);
+		list.Insert_At_End(4);
+	
+		list.Display();
+		System.out.println();
+		list.Delete_At_Position(4);
+		list.Display();
+	}
+}
